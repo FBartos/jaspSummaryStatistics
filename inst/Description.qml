@@ -91,4 +91,12 @@ Description
 		title:	qsTr("S.S. General Bayesian Tests")
 		func:	"SummaryStatsGeneralBayesianTests"
 	}
+
+	Analysis
+	{
+		menu:	qsTr("Bayes Factor Functions")
+		title:	qsTr("S.S. Bayes Factor Functions")
+		func:	"SummaryStatsBayesFactorFunctions"
+	}
+	
 }
