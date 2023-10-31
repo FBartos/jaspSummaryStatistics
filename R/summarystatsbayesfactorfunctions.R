@@ -17,10 +17,31 @@
 
 SummaryStatsBayesFactorFunctions <- function(jaspResults, dataset = NULL, options, ...) {
 
+  dataset <- .bFFReadDataFromOptions(options)
+  saveRDS(options, file = "C:/JASP/options.RDS")
+  saveRDS(dataset, file = "C:/JASP/dataset.RDS")
+
+
   return()
 }
 
 
-.bayesFactorFunctionsDependencies <- c(
+.bFFDependencies <- c(
   "none"
 )
+.bFFReadDataFromOptions <- function(options) {
+
+  theta    <- options[["estimate"]][[1]][["values"]]
+  varTheta <- do.call(cbind, lapply(options[["variance"]], function(col) col[["values"]]))
+
+  # fill lower triangle
+  varTheta[lower.tri(varTheta)] <- t(varTheta)[lower.tri(varTheta)]
+
+  if (any(eigen(varTheta)$values < 0))
+    stop(gettext("The specified variance matrix is not a valid covariance matrix (not positive semi-definite)."))
+
+  return(list(
+    theta    = theta,
+    varTheta = varTheta
+  ))
+}

@@ -39,33 +39,51 @@ Form
 			width:			110 * jaspTheme.uiScale
 			height:			parent.height
 
-			name:				"col"
-			cornerText:			"col"
+			name:				"estimate"
+			cornerText:			""
 			values:				myTable.myValues
 			columnName:			""
 			initialColumnCount: 1
-			function getColHeaderText(defaultName, colIndex) { return String.fromCharCode(65 + colIndex); }
+			function getDefaultValue()  { return 0; }
+			function getColHeaderText(defaultName, colIndex) { return "θ"; }
+			function getRowHeaderText(defaultName, rowIndex) { return "[" + (rowIndex + 1) + "]" }
 		}
 
-		SimpleTableView
+		BasicThreeButtonTableView
 		{
+			modelType		: JASP.Simple
+
+			name:				"variance"
+			cornerText:			"Var(θ)"
+			buttonAddText:		"Add"
+			buttonDeleteText:	"Delete"
+
+			onAddClicked:			tableView.addColumn()
+			buttonAddEnabled:		true
+
+			onDeleteClicked:		tableView.removeColumn(tableView.model.columnCount() - 1)
+			buttonDeleteEnabled: 	tableView.columnCount > initialColumnCount
+
+			buttonResetText:		qsTr("Reset")
+			onResetClicked:			tableView.reset()
+			buttonResetEnabled:		tableView.columnCount > initialColumnCount
+
 			id:						myTable
-			property var myValues: [0]
+			property var myValues:	[0]
 
 			width:								parent.width - x
 			height:								parent.height
 			x:									myColumn.width + jaspTheme.generalAnchorMargin
 			tableView.onColumnCountChanged:		myValues = Array.from({length: tableView.columnCount}, (v, i) => i)
 
-			name:				"table"
-			cornerText:			"table"
-			buttonAddText:		"Add"
-			buttonDeleteText:	"Delete"
+
 			values:				myValues
 			columnName:			""
 			initialColumnCount:	1
 			buttonsInRow: 		true
-			function getColHeaderText(defaultName, colIndex) { return String.fromCharCode(65 + colIndex); }
+			function getDefaultValue(columnIndex, rowIndex)  { return columnIndex < rowIndex ? -1 : (columnIndex == rowIndex ? 1 : 0)	}
+			function getRowHeaderText(defaultName, rowIndex) { return "[" + (rowIndex + 1) + ",]" }
+			function getColHeaderText(defaultName, colIndex) { return "[," + (colIndex + 1) + "]" }
 		}
 
 	}
