@@ -202,7 +202,14 @@
   if (is.null(container)) {
     container <- createJaspContainer()
     # add dependencies for main table (i.e., when does it have to recompute values for the main table)
-    container$dependOn(c("tStatistic", "sampleSizeGroupOne", "sampleSizeGroupTwo", "sampleSize", "alternative", "bayesFactorType", # standard entries
+    container$dependOn(c(
+                         "inputType", # New input type selector
+                         "tStatistic", "cohensD", # Inputs for tAndN and cohensD types
+                         "mean", "sd", "testValue", # Inputs for one-sample meanAndSD
+                         "mean1", "sd1", "mean2", "sd2", # Inputs for independent meansAndSDs
+                         "meanDifference", "sdDifference", # Inputs for paired meanDiffAndSDDiff
+                         "sampleSizeGroupOne", "sampleSizeGroupTwo", "sampleSize", # Sample sizes
+                         "alternative", "bayesFactorType", # Standard entries
                          "defaultStandardizedEffectSize" , "informativeStandardizedEffectSize",        # informative or default
                          "priorWidth"                    , "effectSizeStandardized",                   # default prior
                          "informativeCauchyLocation"     , "informativeCauchyScale",                   # informed cauchy priors
@@ -647,21 +654,101 @@
 }
 .checkErrorsSummaryStatsTTest <- function(options, analysis) {
 
-  # perform a check on the hypothesis
-  if(analysis == "oneSample" || analysis == "pairedSamples"){
+  isInvalidNumeric <- function(value, valueName, allowZero = TRUE, allowNegative = TRUE, allowNA = FALSE) {
+    if (is.null(value) && !allowNA) return(gettextf("%s must be provided.", valueName))
+    if (!allowNA && is.na(value)) return(gettextf("%s cannot be NA.", valueName))
+    if (!is.null(value) && !is.na(value) && !is.finite(value)) return(gettextf("%s must be a finite number.", valueName))
+    if (!is.null(value) && !is.na(value) && !allowZero && value == 0) return(gettextf("%s cannot be zero.", valueName))
+    if (!is.null(value) && !is.na(value) && !allowNegative && value < 0) return(gettextf("%s cannot be negative.", valueName))
+    return(NULL)
+  }
 
-    custom <- function() {
-      if (options$sampleSizeGroupOne == 1)
-        return(gettext("Not enough observations."))
+  custom <- function() {
+    # General sample size checks
+    if (analysis == "oneSample" || analysis == "pairedSamples") {
+      msg <- isInvalidNumeric(options$sampleSizeGroupOne, "Sample size (n)", allowZero = FALSE, allowNegative = FALSE)
+      if (!is.null(msg)) return(msg)
+      if (options$sampleSizeGroupOne <= 1) return(gettext("Sample size (n) must be greater than 1."))
+    } else if (analysis == "independentSamples") {
+      msg1 <- isInvalidNumeric(options$sampleSizeGroupOne, "Sample size group 1 (n\u2081)", allowZero = FALSE, allowNegative = FALSE)
+      if (!is.null(msg1)) return(msg1)
+      msg2 <- isInvalidNumeric(options$sampleSizeGroupTwo, "Sample size group 2 (n\u2082)", allowZero = FALSE, allowNegative = FALSE)
+      if (!is.null(msg2)) return(msg2)
+      if (options$sampleSizeGroupOne <= 0) return(gettext("Sample size group 1 (n\u2081) must be positive.")) # Already covered by isInvalidNumeric if allowZero=F, allowNegative=F
+      if (options$sampleSizeGroupTwo <= 0) return(gettext("Sample size group 2 (n\u2082) must be positive.")) # Already covered
+      if (options$sampleSizeGroupOne + options$sampleSizeGroupTwo - 2 <= 0) {
+        return(gettext("The sum of sample sizes (n\u2081 + n\u2082) must be greater than 2 for the independent samples t-test."))
+      }
     }
 
-  } else {
-
-    custom <- function() {
-      if (options$sampleSizeGroupOne == 1 || options$sampleSizeGroupTwo == 1)
-        return(gettext("Not enough observations."))
+    # Input type specific checks
+    inputType <- options$inputType
+    if (is.null(inputType)) {
+        # This case should ideally not happen if QML defaults are set, but as a fallback:
+        if(is.null(options$tStatistic)) return(gettext("t-statistic must be provided if input type is not specified."))
+        inputType <- "tAndN" # Assume tAndN if inputType is missing but tStatistic is present
     }
 
+
+    if (inputType == "tAndN") {
+      msg <- isInvalidNumeric(options$tStatistic, "t-statistic")
+      if (!is.null(msg)) return(msg)
+      # If tStatistic is NA (allowed by isInvalidNumeric if allowNA=TRUE, but default is FALSE)
+      # and it's the result of a failed calculation, it's an issue.
+      # The main functions now set tStatistic to NA_real_ upon calculation failure and print an error.
+      # .checkErrors should ensure that if tStatistic is NA, it's a problem for the analysis to proceed.
+      if (is.na(options$tStatistic)) return(gettext("t-statistic is NA. Analysis cannot proceed."))
+
+    } else if (inputType == "cohensD") {
+      msg <- isInvalidNumeric(options$cohensD, "Cohen's d")
+      if (!is.null(msg)) return(msg)
+      if (is.na(options$cohensD)) return(gettext("Cohen's d is NA. Analysis cannot proceed.")) # Explicit check for NA
+
+    } else if (inputType == "meanAndSD" && analysis == "oneSample") {
+      msg <- isInvalidNumeric(options$mean, "Mean")
+      if (!is.null(msg)) return(msg)
+      msg <- isInvalidNumeric(options$sd, "Standard deviation (SD)", allowNegative = FALSE)
+      if (!is.null(msg)) return(msg)
+      msg <- isInvalidNumeric(options$testValue, "Test value") # mu0 can be 0 or negative
+      if (!is.null(msg)) return(msg)
+      if (is.na(options$mean) || is.na(options$sd) || is.na(options$testValue)) return(gettext("Mean, SD, or Test Value is NA. Analysis cannot proceed."))
+
+
+    } else if (inputType == "meansAndSDs" && analysis == "independentSamples") {
+      msg <- isInvalidNumeric(options$mean1, "Mean 1")
+      if (!is.null(msg)) return(msg)
+      msg <- isInvalidNumeric(options$sd1, "SD 1", allowNegative = FALSE)
+      if (!is.null(msg)) return(msg)
+      msg <- isInvalidNumeric(options$mean2, "Mean 2")
+      if (!is.null(msg)) return(msg)
+      msg <- isInvalidNumeric(options$sd2, "SD 2", allowNegative = FALSE)
+      if (!is.null(msg)) return(msg)
+      if (is.na(options$mean1) || is.na(options$sd1) || is.na(options$mean2) || is.na(options$sd2)) return(gettext("Mean 1, SD 1, Mean 2, or SD 2 is NA. Analysis cannot proceed."))
+
+
+    } else if (inputType == "meanDiffAndSDDiff" && analysis == "pairedSamples") {
+      msg <- isInvalidNumeric(options$meanDifference, "Mean difference")
+      if (!is.null(msg)) return(msg)
+      msg <- isInvalidNumeric(options$sdDifference, "SD of differences", allowNegative = FALSE)
+      if (!is.null(msg)) return(msg)
+      if (is.na(options$meanDifference) || is.na(options$sdDifference)) return(gettext("Mean difference or SD of differences is NA. Analysis cannot proceed."))
+
+    } else if (!inputType %in% c("tAndN", "cohensD", "meanAndSD", "meansAndSDs", "meanDiffAndSDDiff")) {
+      return(gettextf("Unknown input type: %s", inputType))
+    }
+    
+    # Fallback if tStatistic is NA after input specific checks (e.g. from failed calculation)
+    # This is a bit redundant if the above checks for NA for specific inputs are comprehensive
+    # but serves as a final check on the tStatistic that will be used.
+    if (is.na(options$tStatistic) && (inputType == "cohensD" || 
+        (inputType == "meanAndSD" && analysis == "oneSample") ||
+        (inputType == "meansAndSDs" && analysis == "independentSamples") ||
+        (inputType == "meanDiffAndSDDiff" && analysis == "pairedSamples"))) {
+        return(gettext("t-statistic could not be computed from the provided inputs. Please check the input values."))
+    }
+
+
+    return(NULL) # All checks passed
   }
 
   # Error Check 1: Number of levels of the variables and the hypothesis
@@ -673,3 +760,250 @@
 
 }
 
+# Helper function to process inputs for One Sample T-Test (moved from summarystatsttestbayesianonesample.R)
+processOneSampleInputs <- function(options) {
+  # Calculate t-statistic based on input type
+  # This function expects options$sampleSize to be the relevant sample size.
+  if (!is.null(options[["inputType"]])) {
+    if (options[["inputType"]] == "cohensD") {
+      calcResult <- calculateTFromCohenD(d = options[["cohensD"]], n1 = options[["sampleSize"]], type = "oneSample")
+      if (!is.null(calcResult$tStatistic) && is.finite(calcResult$tStatistic)) {
+        options[["tStatistic"]] <- calcResult$tStatistic
+      } else {
+        options[["tStatistic"]] <- NA_real_
+      }
+    } else if (options[["inputType"]] == "meanAndSD") {
+      calcResult <- calculateTFromMeansSDs(mean1 = options[["mean"]], sd1 = options[["sd"]], n1 = options[["sampleSize"]], mu0 = options[["testValue"]], type = "oneSample")
+      if (!is.null(calcResult$tStatistic) && is.finite(calcResult$tStatistic)) {
+        options[["tStatistic"]] <- calcResult$tStatistic
+      } else {
+        options[["tStatistic"]] <- NA_real_
+      }
+    }
+    # If inputType is "tAndN", options$tStatistic is used directly as provided by the user.
+    # Ensure options$tStatistic exists if inputType is "tAndN", otherwise it should be caught by .checkErrorsSummaryStatsTTest
+    else if (options[["inputType"]] == "tAndN" && is.null(options[["tStatistic"]])) {
+        options[["tStatistic"]] <- NA_real_ # Explicitly set to NA to prevent downstream errors
+    }
+  }
+  return(options)
+}
+
+# Helper function to process inputs for Paired Samples T-Test (moved from summarystatsttestbayesianpairedsamples.R)
+processPairedSamplesInputs <- function(options) {
+  # Calculate t-statistic based on input type
+  # Expects options$sampleSizeGroupOne to be already mapped from options$sampleSize
+  if (!is.null(options[["inputType"]])) {
+    if (options[["inputType"]] == "cohensD") {
+      calcResult <- calculateTFromCohenD(d = options[["cohensD"]], n1 = options[["sampleSizeGroupOne"]], type = "paired")
+      if (!is.null(calcResult$tStatistic) && is.finite(calcResult$tStatistic)) {
+        options[["tStatistic"]] <- calcResult$tStatistic
+      } else {
+        options[["tStatistic"]] <- NA_real_
+      }
+    } else if (options[["inputType"]] == "meanDiffAndSDDiff") {
+      calcResult <- calculateTFromMeansSDs(mean1 = options[["meanDifference"]], sd1 = options[["sdDifference"]], n1 = options[["sampleSizeGroupOne"]], type = "paired")
+      if (!is.null(calcResult$tStatistic) && is.finite(calcResult$tStatistic)) {
+        options[["tStatistic"]] <- calcResult$tStatistic
+      } else {
+        options[["tStatistic"]] <- NA_real_
+      }
+    }
+    # If inputType is "tAndN", options$tStatistic is used directly as provided by the user.
+    # Ensure options$tStatistic exists if inputType is "tAndN"
+    else if (options[["inputType"]] == "tAndN" && is.null(options[["tStatistic"]])) {
+        options[["tStatistic"]] <- NA_real_ # Explicitly set to NA
+    }
+  }
+  return(options)
+}
+
+# Helper function to process inputs for Independent Samples T-Test (moved from summarystatsttestbayesianindependentsamples.R)
+processIndependentSamplesInputs <- function(options) {
+  # Calculate t-statistic based on input type
+  if (!is.null(options[["inputType"]])) {
+    if (options[["inputType"]] == "cohensD") {
+      calcResult <- calculateTFromCohenD(d = options[["cohensD"]], n1 = options[["sampleSizeGroupOne"]], n2 = options[["sampleSizeGroupTwo"]], type = "independent")
+      if (!is.null(calcResult$tStatistic) && is.finite(calcResult$tStatistic)) {
+        options[["tStatistic"]] <- calcResult$tStatistic
+      } else {
+        options[["tStatistic"]] <- NA_real_
+      }
+    } else if (options[["inputType"]] == "meansAndSDs") {
+      calcResult <- calculateTFromMeansSDs(mean1 = options[["mean1"]], sd1 = options[["sd1"]], n1 = options[["sampleSizeGroupOne"]], mean2 = options[["mean2"]], sd2 = options[["sd2"]], n2 = options[["sampleSizeGroupTwo"]], type = "independent")
+      if (!is.null(calcResult$tStatistic) && is.finite(calcResult$tStatistic)) {
+        options[["tStatistic"]] <- calcResult$tStatistic
+      } else {
+        options[["tStatistic"]] <- NA_real_
+      }
+    }
+    # If inputType is "tAndN", options$tStatistic is used directly as provided by the user.
+    # Ensure options$tStatistic exists if inputType is "tAndN"
+    else if (options[["inputType"]] == "tAndN" && is.null(options[["tStatistic"]])) {
+        options[["tStatistic"]] <- NA_real_ # Explicitly set to NA
+    }
+  }
+  return(options)
+}
+
+
+# New functions for calculating t-statistic from Cohen's d or Means/SDs
+
+calculateTFromCohenD <- function(d, n1, n2 = NULL, type) {
+  # Calculates t-statistic from Cohen's d.
+  #
+  # Args:
+  #   d: Cohen's d value.
+  #   n1: Sample size for group 1 (or total sample size for oneSample/paired if n2 is NULL).
+  #   n2: Sample size for group 2 (only for type == "independent").
+  #   type: Can be "oneSample", "independent", or "paired".
+  #
+  # Returns:
+  #   A list containing tStatistic = t, or tStatistic = NA_real_ if inputs are invalid.
+
+  if (is.null(d) || !is.finite(d) || is.null(n1) || !is.finite(n1) || n1 <= 0) {
+    warning("Invalid input for calculateTFromCohenD: d or n1 is missing, non-finite, or n1 <= 0.")
+    return(list(tStatistic = NA_real_))
+  }
+
+  t <- NA_real_
+
+  if (type == "oneSample" || type == "paired") {
+    # For one-sample or paired t-test, n1 is the sample size (number of pairs for paired)
+    if (n1 <= 1 && type == "oneSample") { # df = n-1, so n > 1
+        warning("For one-sample t-test from Cohen's d, n1 must be > 1.")
+        return(list(tStatistic = NA_real_))
+    }
+    if (n1 <= 1 && type == "paired") { # df = n-1 (pairs), so n > 1
+        warning("For paired t-test from Cohen's d, n1 (number of pairs) must be > 1.")
+        return(list(tStatistic = NA_real_))
+    }
+    t <- d * sqrt(n1)
+  } else if (type == "independent") {
+    if (is.null(n2)) {
+      warning("For independent samples t-test from Cohen's d, n2 was not provided. Assuming n1 is total N for two equal groups (n1/2 per group).")
+      if (n1 <= 2) { # Each group must have n > 1 for df > 0
+          warning("For independent samples t-test from Cohen's d with assumed equal groups, total n1 must be > 2.")
+          return(list(tStatistic = NA_real_))
+      }
+      t <- d * sqrt(n1 / 4) # Simplified from d * sqrt((n1/2 * n1/2) / (n1/2 + n1/2)) = d * sqrt(n1/4)
+    } else {
+      if (!is.finite(n2) || n2 <= 0) {
+        warning("Invalid input for calculateTFromCohenD (independent): n2 is non-finite or <= 0.")
+        return(list(tStatistic = NA_real_))
+      }
+      if (n1 + n2 <= 2) { # df = n1+n2-2, so n1+n2 > 2
+          warning("For independent samples t-test from Cohen's d, n1 + n2 must be > 2.")
+          return(list(tStatistic = NA_real_))
+      }
+      # Formula: t = d / sqrt(1/n1 + 1/n2) or d * sqrt((n1*n2)/(n1+n2))
+      # The latter is more common for d to t. Let's use d * sqrt( (n1*n2) / (n1+n2) ) if d is defined as (m1-m2)/s_pooled
+      # If d is defined as (m1-m2) / sqrt( (sd1^2 + sd2^2) / 2 ), then the formula is different.
+      # Assuming d is Cohen's d_s (pooled SD as denominator):
+      # t = d * sqrt( (n1*n2) / (n1+n2) ) is not standard.
+      # Standard conversion is t = d * sqrt( (n1*n2)/(n1+n2) * (n1+n2)/(n1+n2) ) ? No.
+      # From Lakens (2013) Frontiers, formula for d_s: t * sqrt(1/n1 + 1/n2). So, t = d / sqrt(1/n1 + 1/n2)
+      # Or, if d is defined using effective sample size ne = (2*n1*n2)/(n1+n2) for unequal n, then t = d * sqrt(ne/2)
+      # Let's use the formula t = d / sqrt(1/n1 + 1/n2) which is t = d * sqrt( (n1*n2) / (n1+n2) )
+      # This simplifies to t = d * sqrt( (n1 * n2) / (n1 + n2) )
+      # No, the original was correct: t = d / sqrt(1/n1 + 1/n2)
+       t <- d / sqrt(1/n1 + 1/n2)
+    }
+  } else {
+    warning(paste("Invalid type '", type, "' specified for calculateTFromCohenD.", sep=""))
+    return(list(tStatistic = NA_real_))
+  }
+
+  if (!is.finite(t)) {
+      warning("Calculated t-statistic is not finite. Check inputs (e.g., d, n1, n2).")
+      return(list(tStatistic = NA_real_))
+  }
+  return(list(tStatistic = t))
+}
+
+calculateTFromMeansSDs <- function(mean1, sd1, n1, mean2 = NULL, sd2 = NULL, n2 = NULL, mu0 = 0, type) {
+  # Calculates t-statistic from means and standard deviations.
+  #
+  # Args:
+  #   mean1: Mean of group 1 (or mean of differences for paired).
+  #   sd1: Standard deviation of group 1 (or SD of differences for paired).
+  #   n1: Sample size of group 1 (or number of pairs for paired).
+  #   mean2: Mean of group 2 (only for type == "independent").
+  #   sd2: Standard deviation of group 2 (only for type == "independent").
+  #   n2: Sample size of group 2 (only for type == "independent").
+  #   mu0: Value for the null hypothesis (only for type == "oneSample", defaults to 0).
+  #   type: Can be "oneSample", "independent", or "paired".
+  #
+  # Returns:
+  #   A list containing tStatistic = t, or tStatistic = NA_real_ if inputs are invalid.
+
+  if (is.null(mean1) || !is.finite(mean1) || is.null(sd1) || !is.finite(sd1) || sd1 < 0 || is.null(n1) || !is.finite(n1) || n1 <= 0) {
+    warning("Invalid input for calculateTFromMeansSDs: mean1, sd1, or n1 is missing, non-finite, sd1 < 0, or n1 <= 0.")
+    return(list(tStatistic = NA_real_))
+  }
+
+  t <- NA_real_
+
+  if (type == "oneSample") {
+    if (n1 <= 1) {
+      warning("For one-sample t-test from Mean/SD, n1 must be > 1.")
+      return(list(tStatistic = NA_real_))
+    }
+    if (sd1 == 0) {
+        # If sd1 is 0, t will be Inf if mean1 != mu0, or NaN if mean1 == mu0 and sd1/sqrt(n1) is 0.
+        # Let R handle this, it will produce Inf or NaN as appropriate.
+        warning("SD is zero for one-sample t-test. t-statistic might be Inf or NaN.")
+    }
+    t <- (mean1 - mu0) / (sd1 / sqrt(n1))
+  } else if (type == "paired") {
+    # mean1 is mean_diff, sd1 is sd_diff, n1 is number of pairs
+    if (n1 <= 1) {
+      warning("For paired t-test from Mean Diff/SD Diff, n1 (number of pairs) must be > 1.")
+      return(list(tStatistic = NA_real_))
+    }
+     if (sd1 == 0) {
+        warning("SD of differences is zero for paired t-test. t-statistic might be Inf or NaN.")
+    }
+    t <- mean1 / (sd1 / sqrt(n1)) # mu0 for paired differences is implicitly 0
+  } else if (type == "independent") {
+    if (is.null(mean2) || !is.finite(mean2) || is.null(sd2) || !is.finite(sd2) || sd2 < 0 || is.null(n2) || !is.finite(n2) || n2 <= 0) {
+      warning("Invalid input for calculateTFromMeansSDs (independent): mean2, sd2, or n2 is missing, non-finite, sd2 < 0, or n2 <= 0.")
+      return(list(tStatistic = NA_real_))
+    }
+    if (n1 + n2 - 2 <= 0) {
+      warning("For independent samples t-test, n1 + n2 - 2 (df) must be > 0.")
+      return(list(tStatistic = NA_real_))
+    }
+    if (sd1 == 0 && sd2 == 0) {
+        warning("Both SDs are zero for independent samples t-test. t-statistic might be Inf or NaN.")
+    }
+
+    df_val <- n1 + n2 - 2
+    # Pooled variance s_p_squared
+    s_p_squared <- ((n1 - 1) * sd1^2 + (n2 - 1) * sd2^2) / df_val
+    
+    if (s_p_squared < 0) { # Should not happen if sd1, sd2 >= 0
+        warning("Pooled variance is negative. Check SD inputs.")
+        return(list(tStatistic = NA_real_))
+    }
+    
+    denominator_t <- sqrt(s_p_squared * (1/n1 + 1/n2))
+    if (denominator_t == 0) {
+        # This happens if s_p_squared is 0 (i.e. both sd1 and sd2 are 0)
+        # t will be Inf if mean1 != mean2, or NaN if mean1 == mean2.
+        warning("Denominator for t-statistic (independent samples) is zero (likely both SDs are zero). t-statistic might be Inf or NaN.")
+    }
+    t <- (mean1 - mean2) / denominator_t
+  } else {
+    warning(paste("Invalid type '", type, "' specified for calculateTFromMeansSDs.", sep=""))
+    return(list(tStatistic = NA_real_))
+  }
+  
+  if (!is.finite(t)) {
+      # This check is important as division by zero (if sd is zero) can lead to Inf.
+      # While mathematically Inf can be a valid t-statistic in extreme cases, 
+      # JASP might not handle it well downstream. For now, we pass it on.
+      # We already issue warnings if SDs are zero.
+  }
+  return(list(tStatistic = t))
+}

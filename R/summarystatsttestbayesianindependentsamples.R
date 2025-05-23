@@ -15,17 +15,22 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# .processIndependentSamplesInputs function has been moved to R/commonsummarystatsttestbayesian.R and renamed to processIndependentSamplesInputs
+
 SummaryStatsTTestBayesianIndependentSamples <- function(jaspResults, dataset = NULL, options, ...) {
   
+  options <- processIndependentSamplesInputs(options) # Call the function from the common file
+
   # Reading in a datafile is not necessary
   # Check user input for possible errors
   .checkErrorsSummaryStatsTTest(options, "independentSamples")
   
   # Compute the results
-  summaryStatsIndSamplesResults <- .summaryStatsTTestMainFunction(jaspResults, options, "independentSamples")
+  summaryStatsIndependentSamplesResults <- .summaryStatsTTestMainFunction(jaspResults, options, "independentSamples")
+
   # Output plots 
-  .ttestBayesianPriorPosteriorPlotSummaryStats(jaspResults, summaryStatsIndSamplesResults, options)
-  .ttestBayesianPlotRobustnessSummaryStats(jaspResults, summaryStatsIndSamplesResults, options)
+  .ttestBayesianPriorPosteriorPlotSummaryStats(jaspResults, summaryStatsIndependentSamplesResults, options)
+  .ttestBayesianPlotRobustnessSummaryStats(jaspResults, summaryStatsIndependentSamplesResults, options)
   
   return()
 }

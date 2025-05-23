@@ -15,17 +15,24 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# .processOneSampleInputs function has been moved to R/commonsummarystatsttestbayesian.R and renamed to processOneSampleInputs
+
 SummaryStatsTTestBayesianOneSample <- function(jaspResults, dataset = NULL, options, ...) {
+  
+  options <- processOneSampleInputs(options) # Call the function from the common file
+
   # Internally, common functions take sampleSizeGroupOne instead of sampleSize option
   options[["sampleSizeGroupOne"]] <- options[["sampleSize"]]
-  options[["sampleSize"]] <- NULL
-
+  # options[["sampleSize"]] <- NULL # Keep original sampleSize in options for now
+  
   # Reading in a datafile is not necessary
-  # Check user input for possible errors
+  # Check user input for possible errors (will use the tStatistic from options)
   .checkErrorsSummaryStatsTTest(options, "oneSample")
   
   # Compute the results and create main results table
+  # Subsequent functions will use options$tStatistic, which is either from user or NA_real_ if pending implementation
   summaryStatsOneSampleResults <- .summaryStatsTTestMainFunction(jaspResults, options, "oneSample")
+
   # Output plots 
   .ttestBayesianPriorPosteriorPlotSummaryStats(jaspResults, summaryStatsOneSampleResults, options)
   .ttestBayesianPlotRobustnessSummaryStats(jaspResults, summaryStatsOneSampleResults, options)

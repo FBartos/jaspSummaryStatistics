@@ -25,11 +25,23 @@ import JASP.Widgets 1.0
 
 Form
 {
-
 	Group
 	{
-		DoubleField  { label: qsTr("t");			name: "tStatistic"; negativeValues: true	}
-		IntegerField { label: qsTr("Sample size");	name: "sampleSize"							}
+		title: qsTr("Input Type")
+		RadioButtonGroup
+		{
+			id:		inputType
+			name:	"inputType"
+			RadioButton { value: "tAndN";				label: qsTr("t and Sample Size"); checked: true }
+			RadioButton { value: "cohensD";				label: qsTr("Cohen's d and Sample Size")			}
+			RadioButton { value: "meanDiffAndSDDiff";	label: qsTr("Mean Diff., SD Diff., and Sample Size") }
+		}
+
+		DoubleField  { label: qsTr("t");					name: "tStatistic"; negativeValues: true; visible: inputType.value === "tAndN" }
+		DoubleField  { label: qsTr("Cohen's d");			name: "cohensD"; visible: inputType.value === "cohensD" }
+		DoubleField  { label: qsTr("Mean difference");		name: "meanDifference"; visible: inputType.value === "meanDiffAndSDDiff" }
+		DoubleField  { label: qsTr("SD of differences");	name: "sdDifference"; visible: inputType.value === "meanDiffAndSDDiff"; minimumValue: 0 }
+		IntegerField { label: qsTr("Sample size");			name: "sampleSize" }
 	}
 
     Divider { }

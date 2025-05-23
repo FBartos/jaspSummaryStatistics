@@ -15,10 +15,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# .processPairedSamplesInputs function has been moved to R/commonsummarystatsttestbayesian.R and renamed to processPairedSamplesInputs
+
 SummaryStatsTTestBayesianPairedSamples <- function(jaspResults, dataset = NULL, options, ...) {
   # Internally, common functions take sampleSizeGroupOne instead of sampleSize option
   options[["sampleSizeGroupOne"]] <- options[["sampleSize"]]
-  options[["sampleSize"]] <- NULL
+  # options[["sampleSize"]] <- NULL # Keep original sampleSize in options for now
+
+  options <- processPairedSamplesInputs(options) # Call the function from the common file
   
   # Reading in a datafile is not necessary
   # Check user input for possible errors
@@ -26,6 +30,7 @@ SummaryStatsTTestBayesianPairedSamples <- function(jaspResults, dataset = NULL, 
   
   # Compute the results and create main results table
   summaryStatsPairedSamplesResults <- .summaryStatsTTestMainFunction(jaspResults, options, "pairedSamples")
+
   # Output plots 
   .ttestBayesianPriorPosteriorPlotSummaryStats(jaspResults, summaryStatsPairedSamplesResults, options)
   .ttestBayesianPlotRobustnessSummaryStats(jaspResults, summaryStatsPairedSamplesResults, options)
