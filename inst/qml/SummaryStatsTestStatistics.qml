@@ -25,54 +25,33 @@ import JASP.Widgets
 
 Form
 {
+	Group
+	{
+		DoubleField  { name: "zStatistic";         label: qsTr("z");    visible: testType.value === "zTest";      negativeValues: true; defaultValue: 0 }
+		DoubleField  { name: "tStatistic";         label: qsTr("t");    visible: testType.value === "tTest";      negativeValues: true; defaultValue: 0 }
+		IntegerField { name: "tDf";                label: qsTr("df");   visible: testType.value === "tTest";      min: 1; defaultValue: 1 }
+		
+		DoubleField  { name: "chiSquareStatistic"; label: qsTr("χ²");   visible: testType.value === "chiSquare";  min: 0; defaultValue: 0 }
+		IntegerField { name: "chiSquareDf";        label: qsTr("df");   visible: testType.value === "chiSquare";  min: 1; defaultValue: 1 }
+		
+		DoubleField  { name: "fStatistic";         label: qsTr("F");    visible: testType.value === "fTest";      min: 0; defaultValue: 0 }
+		IntegerField { name: "fDf1";               label: qsTr("df1");  visible: testType.value === "fTest";      min: 1; defaultValue: 1 }
+		IntegerField { name: "fDf2";               label: qsTr("df2");  visible: testType.value === "fTest";      min: 1; defaultValue: 1 }
+	}
+
 	RadioButtonGroup
 	{
 		id:		testType
 		name:	"testType"
 		title:	qsTr("Test Type")
 		
-		RadioButton { value: "zTest";		label: qsTr("z-test"); checked: true	}
-		RadioButton { value: "tTest";		label: qsTr("t-test")					}
-		RadioButton { value: "chiSquare";	label: qsTr("Chi-square test")			}
-		RadioButton { value: "fTest";		label: qsTr("F-test")					}
+		RadioButton { value: "zTest";		label: qsTr("z-test");              checked: true }
+		RadioButton { value: "tTest";		label: qsTr("t-test")				}
+		RadioButton { value: "chiSquare";	label: qsTr("Chi-square test")		}
+		RadioButton { value: "fTest";		label: qsTr("F-test")				}
 	}
 
-	Group
-	{
-		title: qsTr("Test Statistics")
-		
-		Group
-		{
-			columns: 4
-			visible: testType.value === "zTest"
-			DoubleField { name: "zStatistic"; label: qsTr("z"); negativeValues: true; fieldWidth: 80 }
-		}
-		
-		Group
-		{
-			columns: 4
-			visible: testType.value === "tTest"
-			DoubleField { name: "tStatistic"; label: qsTr("t"); negativeValues: true; fieldWidth: 80 }
-			IntegerField { name: "tDf"; label: qsTr("df"); min: 1; fieldWidth: 80 }
-		}
-		
-		Group
-		{
-			columns: 4
-			visible: testType.value === "chiSquare"
-			DoubleField { name: "chiSquareStatistic"; label: qsTr("χ²"); min: 0; fieldWidth: 80 }
-			IntegerField { name: "chiSquareDf"; label: qsTr("df"); min: 1; fieldWidth: 80 }
-		}
-		
-		Group
-		{
-			columns: 4
-			visible: testType.value === "fTest"
-			DoubleField { name: "fStatistic"; label: qsTr("F"); min: 0; fieldWidth: 80 }
-			IntegerField { name: "fDf1"; label: qsTr("df1"); min: 1; fieldWidth: 80 }
-			IntegerField { name: "fDf2"; label: qsTr("df2"); min: 1; fieldWidth: 80 }
-		}
-	}
+	Divider { }
 
 	RadioButtonGroup
 	{
@@ -81,8 +60,8 @@ Form
 		name:	"alternative"
 		visible: testType.value === "zTest" || testType.value === "tTest"
 		
-		RadioButton { value: "twoSided";	label: qsTr("Two-sided"); checked: true	}
-		RadioButton { value: "greater";		label: qsTr("Greater")					}
-		RadioButton { value: "less";		label: qsTr("Less")						}
+		RadioButton { value: "twoSided";	label: qsTr("≠ 0 (Two-sided)");     checked: true }
+		RadioButton { value: "greater";	label: qsTr("> 0 (Greater)")		}
+		RadioButton { value: "less";		label: qsTr("< 0 (Less)")			}
 	}
 }

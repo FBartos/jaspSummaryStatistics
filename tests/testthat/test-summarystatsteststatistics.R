@@ -13,6 +13,29 @@ test_that("z-test two-sided results match", {
                       list("z-test", 1.96, 0.0499957902964407))
 })
 
+test_that("z-test one-sided less results match", {
+  options <- jaspTools::analysisOptions("SummaryStatsTestStatistics")
+  options$testType <- "zTest"
+  options$zStatistic <- -1.64
+  options$alternative <- "less"
+  results <- jaspTools::runAnalysis("SummaryStatsTestStatistics", "debug.csv", options)
+
+  table <- results[["results"]][["testStatisticsTable"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+                      list("z-test", -1.64, 0.0505025834741037))
+})
+
+test_that("z-test default values work", {
+  options <- jaspTools::analysisOptions("SummaryStatsTestStatistics")
+  options$testType <- "zTest"
+  # Using default zStatistic = 0, alternative = "twoSided"
+  results <- jaspTools::runAnalysis("SummaryStatsTestStatistics", "debug.csv", options)
+
+  table <- results[["results"]][["testStatisticsTable"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+                      list("z-test", 0, 1))
+})
+
 test_that("t-test one-sided results match", {
   options <- jaspTools::analysisOptions("SummaryStatsTestStatistics")
   options$testType <- "tTest"
