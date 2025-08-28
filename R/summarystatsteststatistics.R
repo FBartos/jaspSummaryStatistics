@@ -79,9 +79,6 @@ SummaryStatsTestStatistics <- function(jaspResults, dataset, options, ...) {
       }
     } else if (options$testType == "t") {
       # t-test
-      if (options$df < 1) {
-        return(list(error = gettext("Degrees of freedom must be positive")))
-      }
       if (options$alternative == "twoSided") {
         pvalue <- 2 * (1 - stats::pt(abs(testStat), df = options$df))
       } else if (options$alternative == "greater") {
@@ -91,18 +88,12 @@ SummaryStatsTestStatistics <- function(jaspResults, dataset, options, ...) {
       }
     } else if (options$testType == "chisq") {
       # Chi-square test (always upper tail)
-      if (options$df < 1) {
-        return(list(error = gettext("Degrees of freedom must be positive")))
-      }
       if (testStat < 0) {
         return(list(error = gettext("Chi-square statistic must be non-negative")))
       }
       pvalue <- 1 - stats::pchisq(testStat, df = options$df)
     } else if (options$testType == "f") {
       # F-test (always upper tail)
-      if (options$df1 < 1 || options$df2 < 1) {
-        return(list(error = gettext("Degrees of freedom must be positive")))
-      }
       if (testStat < 0) {
         return(list(error = gettext("F statistic must be non-negative")))
       }

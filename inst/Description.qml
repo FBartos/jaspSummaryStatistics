@@ -24,6 +24,7 @@ Description
 		menu:	qsTr("Test Statistics")
 		title:	qsTr("S.S. Test Statistics")
 		func:	"SummaryStatsTestStatistics"
+		preloadData: false
 	}
 
 	GroupTitle
