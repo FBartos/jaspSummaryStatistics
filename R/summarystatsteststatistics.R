@@ -71,33 +71,27 @@ SummaryStatsTestStatistics <- function(jaspResults, dataset, options, ...) {
     if (options$testType == "z") {
       # Z-test
       if (options$alternative == "twoSided") {
-        pvalue <- 2 * (1 - stats::pnorm(abs(testStat)))
+        pvalue <- 2 * stats::pnorm(abs(testStat), lower.tail = FALSE)
       } else if (options$alternative == "greater") {
-        pvalue <- 1 - stats::pnorm(testStat)
+        pvalue <- stats::pnorm(testStat, lower.tail = FALSE)
       } else { # less
         pvalue <- stats::pnorm(testStat)
       }
     } else if (options$testType == "t") {
       # t-test
       if (options$alternative == "twoSided") {
-        pvalue <- 2 * (1 - stats::pt(abs(testStat), df = options$df))
+        pvalue <- 2 * stats::pt(abs(testStat), df = options$df, lower.tail = FALSE)
       } else if (options$alternative == "greater") {
-        pvalue <- 1 - stats::pt(testStat, df = options$df)
+        pvalue <- stats::pt(testStat, df = options$df, lower.tail = FALSE)
       } else { # less
         pvalue <- stats::pt(testStat, df = options$df)
       }
     } else if (options$testType == "chisq") {
       # Chi-square test (always upper tail)
-      if (testStat < 0) {
-        return(list(error = gettext("Chi-square statistic must be non-negative")))
-      }
-      pvalue <- 1 - stats::pchisq(testStat, df = options$df)
+      pvalue <- stats::pchisq(testStat, df = options$df, lower.tail = FALSE)
     } else if (options$testType == "f") {
       # F-test (always upper tail)
-      if (testStat < 0) {
-        return(list(error = gettext("F statistic must be non-negative")))
-      }
-      pvalue <- 1 - stats::pf(testStat, df1 = options$df1, df2 = options$df2)
+      pvalue <- stats::pf(testStat, df1 = options$df1, df2 = options$df2, lower.tail = FALSE)
     }
     
     return(list(pvalue = pvalue))

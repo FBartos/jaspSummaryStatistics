@@ -25,6 +25,7 @@ Form
 			name:			"testStatistic"
 			label:			testType.value === "z" ? qsTr("z") : testType.value === "t" ? qsTr("t") : testType.value === "chisq" ? qsTr("χ²") : qsTr("F")
 			negativeValues: testType.value === "z" || testType.value === "t"
+			min:			testType.value === "chisq" || testType.value === "f" ? 0 : -Infinity
 			fieldWidth:		80
 		}
 
