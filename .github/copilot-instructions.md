@@ -1,30 +1,119 @@
-This is a JASP module that contains a QML user-facing interface and R files responsible for the back-end computations.
+# JASP Summary Statistics Module
 
-### Main Rules for Building QML Interface 
-- The QML interface contains `Analyses` defined in the `inst/Descriptions/` directory. Each analysis links to the GUI defined in the `inst/qml/` directory and the R functions defined in the `R/` directory.
-- The QML interface defines a list of options that are passed to the R functions via the `options` argument.
-- The QML interface type-checks the `options` argument to ensure that the required options are present and have valid values. If any required option is missing or has an invalid value, the JASP software automatically terminates before proceeding to the R functions and an error message will be displayed to the user.
-- The QML interface should prevent users from setting incorrect options by providing appropriate input controls. For example, the `DoubleField` contains `min` and `max` properties to restrict the range of acceptable values.
-- The QML interface uses custom QML elements implemented in jasp-desktop (https://github.com/jasp-stats/jasp-desktop/). 
-- A QML element's `title`/`label` property is user-facing and should be concise and descriptive.
-- A QML element's `name` property is internal and should correspond to the `title`/`label` property translated into camelCase, inheriting prefixes from the hierarchy of the QML elements.
-- QML elements should be organized in a way that reflects the logical structure of the user interface, grouping related elements together.
-- QML elements should be documented using the `info` property. Document the elements in simple, non-technical, and accessible language.
-- Use the existing QML files as examples for QML structure and style.
-- If you add a new QML option, you might need to add the default value to the `options` list in the corresponding unit tests.
-- Further details about the QML elements can be found in the `jasp-qml-guide.md` file.
+ALWAYS follow these instructions first and fallback to additional search and context gathering ONLY if the information in these instructions is incomplete or found to be in error.
 
-### Main Rules for Building R Side
-- The R files are located in the `R/` directory and contain R functions that are called by the `Analyses` defined in the `inst/Descriptions/` directory.
-- The R files should follow CRAN guidelines for code, documentation, and package structure.
-- R scripts should be organized in a way that reflects the logical structure of the analyses, grouping related functions together.
-- R functions common to multiple analyses should be placed in a common R file (there are multiple common files depending on whether the functions are common to all analyses or only a subset of analyses).
-- R files should always use camelCase for function and variable names throughout the codebase.
-- Never use `library()` or `require()` in the R files. Use the `package::function()` syntax to avoid conflicts.
-- Avoid adding dependencies unless absolutely necessary. If a simple R function would require a new dependency, re-implement the function without the dependency and acknowledge the source of the original function in a comment.
-- Since the `options` argument is checked in the GUI, the R functions should not check the validity of the user input. The only exceptions are the `dataset` input object (a data.frame forwarded from the GUI) and the `TextField` and `FormulaField` options (which can contain arbitrary text input). If the `dataset`, `TextField`, or `FormulaField` contain an invalid input, the `.quitAnalysis(gettext("<INSERT INFORMATIVE ERROR MESSAGE>"))` function should be used to terminate the execution.
-- The `tests` directory contains unit tests for the R functions. The unit tests are run via the `jaspTools::testAll()` function.
-- Avoid using non-CRAN dependencies to maintain CRAN compliance.
-- Further details about the R files can be found in the `jasp-r-guide.md` file.
-- Further details about implementing the R analyses can be found in the `jasp-r-analyses-guide.md` file.
-- Further details about writing messages for the user-facing elements can be found in the `jasp-human-guide.md` file.
+This is a JASP module providing Bayesian statistical tests from summary statistics. It contains QML user-facing interfaces and R backend computations.
+
+## Working Effectively
+
+### Initial Setup and Build
+- Install R (version 4.5+ required): The system already has R 4.5.1
+- Run tests to validate setup: `cd /path/to/jaspSummaryStatistics && Rscript -e "library(jaspTools); testAll()"`
+- Tests take 70+ seconds to complete. NEVER CANCEL. Set timeout to 120+ seconds.
+- All tests should pass (113 PASS expected) with some deprecation warnings that can be ignored.
+
+### Running Tests
+- `Rscript -e "library(jaspTools); testAll()"` -- runs full test suite, takes 70+ seconds. NEVER CANCEL.
+- Tests are located in `tests/testthat/test-*.R` files
+- Each test file corresponds to an R analysis file in the `R/` directory
+- Test snapshots are stored in `tests/testthat/_snaps/`
+
+### Repository Structure
+```
+/
+├── R/                          # Backend R analysis functions
+├── inst/
+│   ├── qml/                   # QML interface definitions
+│   ├── Descriptions/          # Analysis descriptions (Description.qml)
+│   ├── help/                  # Markdown help files
+│   └── Upgrades.qml          # Version upgrade mappings
+├── tests/testthat/           # Unit tests using jaspTools
+├── .github/workflows/        # CI/CD automation
+├── DESCRIPTION               # R package metadata
+├── renv.lock                # R dependency lockfile
+└── jaspSummaryStatistics.Rproj  # RStudio project
+```
+
+### Key Files to Check After Changes
+- Always check corresponding test file in `tests/testthat/` when modifying R functions
+- Always update `inst/help/*.md` when changing analysis interfaces
+- Check `inst/Upgrades.qml` when renaming QML options to maintain backward compatibility
+
+## Building and Testing Code Changes
+
+### Before Making Changes
+- Run full test suite to establish baseline: `Rscript -e "library(jaspTools); testAll()"`
+- NEVER CANCEL: Tests take 70+ seconds, set timeout to 120+ seconds
+
+### After Making Changes
+- Run tests again to verify your changes: `Rscript -e "library(jaspTools); testAll()"`
+- NEVER CANCEL: Build and test can take up to 2 minutes total
+- All 113 tests must pass - do not proceed if tests fail
+- Some deprecation warnings are expected and can be ignored
+
+### Manual Validation Scenarios
+Since this module runs within JASP desktop application, manual testing requires:
+- Testing via jaspTools test framework (covered above)
+- Individual analysis validation can be done through R console using jaspTools::runAnalysis()
+- CANNOT run standalone - module only functions within JASP ecosystem
+
+## Development Rules
+
+### QML Interface Rules
+- QML interfaces in `inst/qml/` define user-facing options passed to R functions
+- Each analysis links: `inst/Descriptions/` → `inst/qml/` → `R/` functions
+- QML elements use `name` (camelCase internal) and `title`/`label` (user-facing)
+- Document QML elements using `info` property for help generation
+- Use existing QML files as examples for structure and style
+- Add default values to unit tests when adding new QML options
+
+### R Backend Rules  
+- R functions in `R/` directory called by analyses in `inst/Descriptions/`
+- Use camelCase for all function and variable names
+- NEVER use `library()` or `require()` - use `package::function()` syntax
+- Avoid new dependencies - re-implement simple functions instead
+- Use `.quitAnalysis(gettext("message"))` for terminating execution on invalid input
+- Follow CRAN guidelines for code structure and documentation
+
+### Testing Requirements
+- Unit tests in `tests/testthat/` use jaspTools framework
+- Tests run via `jaspTools::testAll()` - takes 70+ seconds, NEVER CANCEL
+- Test files correspond to R analysis files (test-*.R matches *.R)
+- Update test expected values when changing analysis outputs
+
+## CI/CD Pipeline
+- GitHub Actions in `.github/workflows/unittests.yml` runs on every push
+- Triggers on changes to R, test, or package files
+- Uses jasp-stats/jasp-actions reusable workflow
+- No external dependencies (JAGS, igraph) required for this module
+
+## Common Tasks
+
+### Adding New Analysis
+1. Create R function in `R/` directory following camelCase naming
+2. Add QML interface in `inst/qml/`  
+3. Define analysis in `inst/Description.qml`
+4. Create help file in `inst/help/`
+5. Add unit tests in `tests/testthat/`
+6. Run `jaspTools::testAll()` to validate (70+ seconds, NEVER CANCEL)
+
+### Modifying Existing Analysis
+1. Update R function maintaining existing interface
+2. Update QML if adding/changing options
+3. Update help documentation
+4. Update unit tests and expected results
+5. Add upgrade mapping to `inst/Upgrades.qml` if renaming options
+6. Run tests: `jaspTools::testAll()` (NEVER CANCEL, 70+ seconds)
+
+### Key Dependencies
+- jaspTools: Testing and development framework
+- BayesFactor: Core Bayesian computations  
+- jaspBase, jaspGraphs, jaspTTests: Core JASP functionality
+- R 4.5+ required
+
+## Validation Checklist
+- [ ] Run `jaspTools::testAll()` - wait full 70+ seconds, all 113 tests pass
+- [ ] Check test output for new failures (ignore deprecation warnings)  
+- [ ] Verify help files updated for interface changes
+- [ ] Confirm QML options have corresponding test defaults
+- [ ] Add upgrade mappings if renaming QML options
