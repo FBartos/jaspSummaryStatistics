@@ -59,7 +59,7 @@ These are the authoritative references for all detailed development work. Use th
 ### After Making Changes
 - Run tests again to verify your changes: `Rscript -e "library(jaspTools); testAll()"`
 - NEVER CANCEL: Build and test can take up to 2 minutes total
-- All 113 tests must pass - do not proceed if tests fail
+- All tests must pass - do not proceed if tests fail
 - Some deprecation warnings are expected and can be ignored
 
 ### Manual Validation Scenarios
