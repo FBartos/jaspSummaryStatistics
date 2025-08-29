@@ -90,12 +90,13 @@ Since this module runs within JASP desktop application, manual testing requires:
 - Follow CRAN guidelines for code structure and documentation
 
 ### Input Validation and Error Handling
-- **MANDATORY**: Always implement comprehensive input validation using `.hasErrors()` function
+- **TARGETED VALIDATION ONLY**: Since `options` are validated in the GUI, R functions should NOT check user input validity except for specific cases
+- **VALIDATE ONLY**: `dataset` object (data.frame from GUI), `TextField` options, and `FormulaField` options (arbitrary text input)
 - **CRITICAL**: Reference [jasp-human-guide.md](.github/jasp-human-guide.md) for user-friendly error messages
 - Use `gettext()` and `gettextf()` for all user-visible messages (internationalization)
-- Check for: missing values, infinity, negative values, insufficient observations, factor levels, variance
+- For `dataset` validation, check: missing values, infinity, negative values, insufficient observations, factor levels, variance
 - Example: `.hasErrors(dataset, type = c('observations', 'variance', 'infinity'), all.target = options$variables, observations.amount = '< 3', exitAnalysisIfErrors = TRUE)`
-- Always validate assumptions automatically, even when users don't explicitly request checks
+- Validate dataset assumptions automatically when required for analysis validity
 - Use footnotes for assumption violations that affect specific cells/values
 - Place critical errors that invalidate entire analysis over the results table
 
@@ -144,7 +145,7 @@ Since this module runs within JASP desktop application, manual testing requires:
 - **Step 1**: Create main analysis function with `jaspResults`, `dataset`, `options` arguments
 - **Step 2**: Check if results can be computed (`ready <- length(options$variables) > 0`)
 - **Step 3**: Read dataset with `.readDataSetToEnd()` and proper column specifications  
-- **Step 4**: **CRITICAL** - Use `.hasErrors()` for comprehensive error checking
+- **Step 4**: **CRITICAL** - Use `.hasErrors()` for `dataset`, `TextField`, `FormulaField` validation only
 - **Step 5**: Create output tables/plots with proper dependencies, citations, column specs
 - Use `createJaspTable()`, `createJaspPlot()`, `createJaspHtml()` for output elements
 - Always set `$dependOn()` for proper caching and state management
@@ -166,6 +167,6 @@ Since this module runs within JASP desktop application, manual testing requires:
 - [ ] Verify help files updated for interface changes
 - [ ] Confirm QML options have corresponding test defaults
 - [ ] Add upgrade mappings if renaming QML options
-- [ ] Implemented comprehensive input validation with `.hasErrors()`
+- [ ] Implemented targeted input validation for `dataset`, `TextField`, `FormulaField` only with `.hasErrors()`
 - [ ] Used `gettext()`/`gettextf()` for all user-visible messages
 - [ ] Added proper error handling for edge cases and invalid inputs
