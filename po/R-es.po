@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JASP 0.9.2\n"
-"POT-Creation-Date: 2024-11-16 02:46\n"
-"PO-Revision-Date: 2025-07-26 07:51+0000\n"
+"POT-Creation-Date: 2025-09-13 02:42\n"
+"PO-Revision-Date: 2025-11-15 14:37+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/jasp/"
 "jaspsummarystatistics-r/es/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 msgid "BF%s"
 msgstr "FB%s"
@@ -64,13 +64,13 @@ msgid "max BF%s"
 msgstr "máx FB%s"
 
 msgid "user prior"
-msgstr "previa del usuario"
+msgstr "Previa del usuario"
 
 msgid "wide prior"
-msgstr "anchura previa"
+msgstr "Anchura previa"
 
 msgid "ultrawide prior"
-msgstr "ultra anchura previa"
+msgstr "Ultra anchura previa"
 
 msgid "%1$s at r==%2$s"
 msgstr "%1$s en r==%2$s"
@@ -159,7 +159,8 @@ msgid "Bayes factor contours breaks must be positive."
 msgstr "Las rupturas de los contornos del Factor de Bayes deben ser positivas."
 
 msgid "Bayes factor contours breaks must be increasing."
-msgstr "Las rupturas de los contornos del Factor de Bayes deben ser crecientes."
+msgstr ""
+"Las rupturas de los contornos del Factor de Bayes deben ser crecientes."
 
 msgid "exp(Prior mean)"
 msgstr "exp(Media previa)"
@@ -353,6 +354,33 @@ msgstr ""
 "Entrada: Cuando el número de covariables para la hipótesis alternativa es "
 "mayor que el de la hipótesis nula, el R%s tiene que ser mayor en la "
 "hipótesis alternativa que en la nula"
+
+msgid "Test Statistics"
+msgstr "Estadísticos de contrastes"
+
+msgid "Test"
+msgstr "Contraste"
+
+msgid "Statistic"
+msgstr "Estadístico"
+
+msgid "df"
+msgstr "gl"
+
+msgid "df1"
+msgstr "gl1"
+
+msgid "df2"
+msgstr "gl2"
+
+msgid "z"
+msgstr "z"
+
+msgid "χ²"
+msgstr "χ²"
+
+msgid "F"
+msgstr "F"
 
 #~ msgid "Plotting not possible: Bayes factor should be numeric!"
 #~ msgstr ""

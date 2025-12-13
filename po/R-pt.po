@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspSummaryStatistics 0.15\n"
-"POT-Creation-Date: 2024-11-16 02:46\n"
-"PO-Revision-Date: 2025-08-09 02:57+0000\n"
+"POT-Creation-Date: 2025-09-13 02:42\n"
+"PO-Revision-Date: 2025-09-14 08:02+0000\n"
 "Last-Translator: Wendel Paulo Silvestre <wpsilvestre@ucs.br>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/jasp/"
 "jaspsummarystatistics-r/pt/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 msgid "BF%s"
 msgstr "BF%s"
@@ -132,7 +132,7 @@ msgid "Model Summary"
 msgstr "Resumo do Modelo"
 
 msgid "Effect size"
-msgstr "Tamanho do efeito"
+msgstr "Tamanho de efeito"
 
 msgid "Standard error"
 msgstr "Erro padrão"
@@ -348,3 +348,30 @@ msgstr ""
 "Entrada: Quando o número de covariáveis para a Hipótese alternativa é maior "
 "do que aquela da Hipótese nula, o R%s deve ser maior na Hipótese alternativa "
 "do que na Hipótese nula"
+
+msgid "Test Statistics"
+msgstr "Estatística de Teste"
+
+msgid "Test"
+msgstr "Teste"
+
+msgid "Statistic"
+msgstr "Estatística"
+
+msgid "df"
+msgstr "gl"
+
+msgid "df1"
+msgstr "gl1"
+
+msgid "df2"
+msgstr "gl2"
+
+msgid "z"
+msgstr "z"
+
+msgid "χ²"
+msgstr "χ²"
+
+msgid "F"
+msgstr "F"
