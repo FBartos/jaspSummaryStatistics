@@ -11,7 +11,7 @@
   "Packages": {
     "BAS": {
       "Package": "BAS",
-      "Version": "1.7.5",
+      "Version": "2.0.2",
       "Source": "Repository",
       "Requirements": [
         "graphics",
@@ -80,7 +80,7 @@
     },
     "Hmisc": {
       "Package": "Hmisc",
-      "Version": "5.2-4",
+      "Version": "5.2-5",
       "Source": "Repository",
       "Requirements": [
         "base64enc",
@@ -170,16 +170,17 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.1.0",
+      "Version": "1.1.1",
       "Source": "Repository",
       "Requirements": [
         "methods",
+        "R",
         "utils"
       ]
     },
     "RcppArmadillo": {
       "Package": "RcppArmadillo",
-      "Version": "15.2.2-1",
+      "Version": "15.2.3-1",
       "Source": "Repository",
       "Requirements": [
         "methods",
@@ -303,7 +304,7 @@
     },
     "afex": {
       "Package": "afex",
-      "Version": "1.5-0",
+      "Version": "1.5-1",
       "Source": "Repository",
       "Requirements": [
         "car",
@@ -540,16 +541,6 @@
         "R"
       ]
     },
-    "cellranger": {
-      "Package": "cellranger",
-      "Version": "1.1.0",
-      "Source": "Repository",
-      "Requirements": [
-        "R",
-        "rematch",
-        "tibble"
-      ]
-    },
     "checkmate": {
       "Package": "checkmate",
       "Version": "2.3.3",
@@ -711,6 +702,17 @@
         "utils"
       ]
     },
+    "crosstalk": {
+      "Package": "crosstalk",
+      "Version": "1.2.2",
+      "Source": "Repository",
+      "Requirements": [
+        "htmltools",
+        "jsonlite",
+        "lazyeval",
+        "R6"
+      ]
+    },
     "curl": {
       "Package": "curl",
       "Version": "7.0.0",
@@ -721,7 +723,7 @@
     },
     "data.table": {
       "Package": "data.table",
-      "Version": "1.17.8",
+      "Version": "1.18.0",
       "Source": "Repository",
       "Requirements": [
         "methods",
@@ -864,7 +866,7 @@
     },
     "emmeans": {
       "Package": "emmeans",
-      "Version": "2.0.0",
+      "Version": "2.0.1",
       "Source": "Repository",
       "Requirements": [
         "estimability",
@@ -1008,7 +1010,7 @@
     },
     "forecast": {
       "Package": "forecast",
-      "Version": "8.24.0",
+      "Version": "9.0.0",
       "Source": "Repository",
       "Requirements": [
         "colorspace",
@@ -1142,7 +1144,7 @@
     },
     "ggpp": {
       "Package": "ggpp",
-      "Version": "0.5.9",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Requirements": [
         "dplyr",
@@ -1152,7 +1154,6 @@
         "grid",
         "gridExtra",
         "lubridate",
-        "magrittr",
         "MASS",
         "polynom",
         "R",
@@ -1237,7 +1238,7 @@
     },
     "ggsci": {
       "Package": "ggsci",
-      "Version": "4.1.0",
+      "Version": "4.2.0",
       "Source": "Repository",
       "Requirements": [
         "ggplot2",
@@ -1394,14 +1395,6 @@
         "vctrs"
       ]
     },
-    "here": {
-      "Package": "here",
-      "Version": "1.0.2",
-      "Source": "Repository",
-      "Requirements": [
-        "rprojroot"
-      ]
-    },
     "highr": {
       "Package": "highr",
       "Version": "0.11",
@@ -1478,6 +1471,19 @@
         "R6",
         "Rcpp",
         "utils"
+      ]
+    },
+    "httr": {
+      "Package": "httr",
+      "Version": "1.4.7",
+      "Source": "Repository",
+      "Requirements": [
+        "curl",
+        "jsonlite",
+        "mime",
+        "openssl",
+        "R",
+        "R6"
       ]
     },
     "hypergeo": {
@@ -1578,7 +1584,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspAnova",
-      "RemoteSha": "120339c647a960e35eb37dd1d1b9aa634510a794"
+      "RemoteSha": "4baec922ef8cc1c7ad473a90be435907202b2565"
     },
     "jaspBase": {
       "Package": "jaspBase",
@@ -1609,7 +1615,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspBase",
-      "RemoteSha": "3c801bacc9d5a3dcadf5c318e23a82779514a96d"
+      "RemoteSha": "cf46b53dccdb6c63d4b35f4067d0a8205bbc56dc"
     },
     "jaspDescriptives": {
       "Package": "jaspDescriptives",
@@ -1624,6 +1630,7 @@
         "forecast",
         "flexplot",
         "ggrain",
+        "ggh4x",
         "ggpp",
         "ggtext",
         "dplyr",
@@ -1636,7 +1643,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspDescriptives",
-      "RemoteSha": "7b71a843b1db7e7193216f1348998db7af9d0f65"
+      "RemoteSha": "99db1ed9d322ebadf5bfee1f6deee316080b2aa0"
     },
     "jaspFrequencies": {
       "Package": "jaspFrequencies",
@@ -1661,7 +1668,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspFrequencies",
-      "RemoteSha": "39076823f1dad648faf08ac425e1db291399cae9"
+      "RemoteSha": "04553dbb70566dcbd3316ed58309e6adb4666733"
     },
     "jaspGraphs": {
       "Package": "jaspGraphs",
@@ -1673,8 +1680,10 @@
         "ggplot2",
         "gridExtra",
         "gtable",
+        "htmlwidgets",
         "jsonlite",
         "lifecycle",
+        "plotly",
         "R6",
         "rlang",
         "scales"
@@ -1683,7 +1692,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspGraphs",
-      "RemoteSha": "080034c03ac079057a82317d8575c81339133ec6"
+      "RemoteSha": "266f408db9761292050c1319c01640747bf77a0d"
     },
     "jaspRegression": {
       "Package": "jaspRegression",
@@ -1717,7 +1726,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspRegression",
-      "RemoteSha": "14673d28f9059386b7e16522aad7afd40e0f2877"
+      "RemoteSha": "bf870446129a9bb60d734e3e99374c0b993892d7"
     },
     "jaspTTests": {
       "Package": "jaspTTests",
@@ -1737,7 +1746,7 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "jasp-stats",
       "RemoteRepo": "jaspTTests",
-      "RemoteSha": "cb1856ad4e9c63c2f28f3bcadafaa899760a801d"
+      "RemoteSha": "5f513ecf32ea158b4c11b1aed87dc3aa74226bcb"
     },
     "jomo": {
       "Package": "jomo",
@@ -1802,7 +1811,7 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.50",
+      "Version": "1.51",
       "Source": "Repository",
       "Requirements": [
         "evaluate",
@@ -1825,9 +1834,10 @@
     },
     "later": {
       "Package": "later",
-      "Version": "1.4.4",
+      "Version": "1.4.5",
       "Source": "Repository",
       "Requirements": [
+        "R",
         "Rcpp",
         "rlang"
       ]
@@ -1847,7 +1857,7 @@
     },
     "lavaan": {
       "Package": "lavaan",
-      "Version": "0.6-20",
+      "Version": "0.6-21",
       "Source": "Repository",
       "Requirements": [
         "graphics",
@@ -1863,6 +1873,14 @@
         "utils"
       ]
     },
+    "lazyeval": {
+      "Package": "lazyeval",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Requirements": [
+        "R"
+      ]
+    },
     "libcoin": {
       "Package": "libcoin",
       "Version": "1.0-10",
@@ -1875,18 +1893,17 @@
     },
     "lifecycle": {
       "Package": "lifecycle",
-      "Version": "1.0.4",
+      "Version": "1.0.5",
       "Source": "Repository",
       "Requirements": [
         "cli",
-        "glue",
         "R",
         "rlang"
       ]
     },
     "litedown": {
       "Package": "litedown",
-      "Version": "0.8",
+      "Version": "0.9",
       "Source": "Repository",
       "Requirements": [
         "commonmark",
@@ -1924,7 +1941,7 @@
     },
     "lmerTest": {
       "Package": "lmerTest",
-      "Version": "3.1-3",
+      "Version": "3.2-0",
       "Source": "Repository",
       "Requirements": [
         "ggplot2",
@@ -1933,6 +1950,7 @@
         "methods",
         "numDeriv",
         "R",
+        "reformulas",
         "stats"
       ]
     },
@@ -2033,17 +2051,17 @@
     },
     "mgcv": {
       "Package": "mgcv",
-      "Version": "1.9-3",
+      "Version": "1.9-4",
       "Source": "Repository",
       "Requirements": [
-        "methods",
-        "stats",
         "graphics",
         "Matrix",
-        "splines",
-        "utils",
+        "methods",
+        "nlme",
         "R",
-        "nlme"
+        "splines",
+        "stats",
+        "utils"
       ]
     },
     "mice": {
@@ -2252,7 +2270,7 @@
     },
     "officer": {
       "Package": "officer",
-      "Version": "0.7.2",
+      "Version": "0.7.3",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -2304,7 +2322,7 @@
     },
     "ordinal": {
       "Package": "ordinal",
-      "Version": "2023.12-4.1",
+      "Version": "2025.12-29",
       "Source": "Repository",
       "Requirements": [
         "MASS",
@@ -2463,6 +2481,36 @@
         "utils"
       ]
     },
+    "plotly": {
+      "Package": "plotly",
+      "Version": "4.11.0",
+      "Source": "Repository",
+      "Requirements": [
+        "base64enc",
+        "crosstalk",
+        "data.table",
+        "digest",
+        "dplyr",
+        "ggplot2",
+        "htmltools",
+        "htmlwidgets",
+        "httr",
+        "jsonlite",
+        "lazyeval",
+        "magrittr",
+        "promises",
+        "purrr",
+        "R",
+        "RColorBrewer",
+        "rlang",
+        "scales",
+        "tibble",
+        "tidyr",
+        "tools",
+        "vctrs",
+        "viridisLite"
+      ]
+    },
     "plotrix": {
       "Package": "plotrix",
       "Version": "3.8-13",
@@ -2567,7 +2615,7 @@
     },
     "purrr": {
       "Package": "purrr",
-      "Version": "1.2.0",
+      "Version": "1.2.1",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -2647,7 +2695,7 @@
     },
     "rappdirs": {
       "Package": "rappdirs",
-      "Version": "0.3.3",
+      "Version": "0.3.4",
       "Source": "Repository",
       "Requirements": [
         "R"
@@ -2684,22 +2732,9 @@
         "vroom"
       ]
     },
-    "readxl": {
-      "Package": "readxl",
-      "Version": "1.4.5",
-      "Source": "Repository",
-      "Requirements": [
-        "cellranger",
-        "cpp11",
-        "progress",
-        "R",
-        "tibble",
-        "utils"
-      ]
-    },
     "reformulas": {
       "Package": "reformulas",
-      "Version": "0.4.2",
+      "Version": "0.4.3.1",
       "Source": "Repository",
       "Requirements": [
         "Matrix",
@@ -2717,12 +2752,6 @@
         "stats",
         "utils"
       ]
-    },
-    "rematch": {
-      "Package": "rematch",
-      "Version": "2.0.0",
-      "Source": "Repository",
-      "Requirements": []
     },
     "reshape2": {
       "Package": "reshape2",
@@ -2754,9 +2783,29 @@
       "RemoteRepo": "restriktor",
       "RemoteSha": "70b3ae290ecd0fc15fdb0e241f36ffaeb1553019"
     },
+    "rgl": {
+      "Package": "rgl",
+      "Version": "1.3.31",
+      "Source": "Repository",
+      "Requirements": [
+        "base64enc",
+        "graphics",
+        "grDevices",
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "knitr",
+        "magrittr",
+        "mime",
+        "R",
+        "R6",
+        "stats",
+        "utils"
+      ]
+    },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.6",
+      "Version": "1.1.7",
       "Source": "Repository",
       "Requirements": [
         "R",
@@ -2795,14 +2844,6 @@
         "grDevices"
       ]
     },
-    "rprojroot": {
-      "Package": "rprojroot",
-      "Version": "2.1.1",
-      "Source": "Repository",
-      "Requirements": [
-        "R"
-      ]
-    },
     "rstatix": {
       "Package": "rstatix",
       "Version": "0.7.3",
@@ -2826,7 +2867,7 @@
     },
     "rstudioapi": {
       "Package": "rstudioapi",
-      "Version": "0.17.1",
+      "Version": "0.18.0",
       "Source": "Repository",
       "Requirements": []
     },
@@ -3001,16 +3042,16 @@
     },
     "survival": {
       "Package": "survival",
-      "Version": "3.8-3",
+      "Version": "3.8-6",
       "Source": "Repository",
       "Requirements": [
         "graphics",
         "Matrix",
         "methods",
+        "R",
         "splines",
         "stats",
-        "utils",
-        "R"
+        "utils"
       ]
     },
     "svglite": {
@@ -3065,7 +3106,7 @@
     },
     "tibble": {
       "Package": "tibble",
-      "Version": "3.3.0",
+      "Version": "3.3.1",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -3082,7 +3123,7 @@
     },
     "tidyplots": {
       "Package": "tidyplots",
-      "Version": "0.3.1",
+      "Version": "0.4.0",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -3094,10 +3135,10 @@
         "ggrastr",
         "ggrepel",
         "glue",
+        "gtable",
         "Hmisc",
         "htmltools",
         "lifecycle",
-        "patchwork",
         "purrr",
         "R",
         "rlang",
@@ -3109,7 +3150,7 @@
     },
     "tidyr": {
       "Package": "tidyr",
-      "Version": "1.3.1",
+      "Version": "1.3.2",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -3181,7 +3222,7 @@
     },
     "tseries": {
       "Package": "tseries",
-      "Version": "0.10-58",
+      "Version": "0.10-59",
       "Source": "Repository",
       "Requirements": [
         "graphics",
@@ -3256,30 +3297,24 @@
     },
     "vcdExtra": {
       "Package": "vcdExtra",
-      "Version": "0.8-6",
+      "Version": "0.8.7",
       "Source": "Repository",
       "Requirements": [
         "ca",
-        "dplyr",
-        "glue",
         "gnm",
         "grDevices",
         "grid",
-        "here",
         "MASS",
-        "purrr",
         "R",
-        "readxl",
+        "rgl",
         "stats",
-        "stringr",
-        "tidyr",
         "utils",
         "vcd"
       ]
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.6.5",
+      "Version": "0.7.0",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -3351,7 +3386,7 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.54",
+      "Version": "0.56",
       "Source": "Repository",
       "Requirements": [
         "grDevices",
@@ -3362,7 +3397,7 @@
     },
     "xml2": {
       "Package": "xml2",
-      "Version": "1.5.1",
+      "Version": "1.5.2",
       "Source": "Repository",
       "Requirements": [
         "cli",
@@ -3405,7 +3440,7 @@
     },
     "zoo": {
       "Package": "zoo",
-      "Version": "1.8-14",
+      "Version": "1.8-15",
       "Source": "Repository",
       "Requirements": [
         "graphics",
