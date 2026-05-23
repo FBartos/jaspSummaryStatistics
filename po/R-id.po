@@ -1,14 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: jaspSummaryStatistics 0.96.4\n"
-"POT-Creation-Date: 2026-04-25 03:32\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Project-Id-Version: jaspSummaryStatistics 0.95.5\n"
+"POT-Creation-Date: 2025-11-15 02:52\n"
+"PO-Revision-Date: 2026-05-17 06:11+0000\n"
+"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/jasp/"
+"jaspsummarystatistics-r/id/>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 msgid "BF%s"
 msgstr ""
@@ -17,34 +20,34 @@ msgid "Log(BF%s)"
 msgstr ""
 
 msgid "t"
-msgstr ""
+msgstr "t"
 
 msgid "Bayesian Independent Samples T-Test"
-msgstr ""
+msgstr "Uji-T Sampel Independen Bayes"
 
 msgid "n%s"
 msgstr ""
 
 msgid "n"
-msgstr ""
+msgstr "n"
 
 msgid "error %%"
-msgstr ""
+msgstr "galat %%"
 
 msgid "p"
-msgstr ""
+msgstr "p"
 
 msgid "Proportional error estimate could not be computed."
 msgstr ""
 
 msgid "Prior and Posterior"
-msgstr ""
+msgstr "Priori dan Posterior"
 
 msgid "Plotting not possible: %s"
-msgstr ""
+msgstr "Pembuatan plot tidak memungkinkan: %s"
 
 msgid "Bayes Factor Robustness Check"
-msgstr ""
+msgstr "Faktor Bayes dan Pemeriksaan Kekuatan"
 
 msgid "Plotting not possible: Bayes factor robustness check plot currently not supported for informed prior."
 msgstr ""
@@ -53,22 +56,22 @@ msgid "Bayes factors could not be computed for 100 values of the prior."
 msgstr ""
 
 msgid "max BF%s"
-msgstr ""
+msgstr "BF%s maks"
 
 msgid "user prior"
-msgstr ""
+msgstr "priori pengguna"
 
 msgid "wide prior"
-msgstr ""
+msgstr "priori lebar"
 
 msgid "ultrawide prior"
-msgstr ""
+msgstr "priori ultralebar"
 
 msgid "%1$s at r==%2$s"
-msgstr ""
+msgstr "%1$s di r==%2$s"
 
 msgid "Cauchy prior width"
-msgstr ""
+msgstr "Lebar priori Cauchy"
 
 msgid "For all tests, the alternative hypothesis specifies that group 1 is greater than group 2."
 msgstr ""
@@ -89,19 +92,19 @@ msgid "For all tests, the alternative hypothesis specifies that measure 1 is les
 msgstr ""
 
 msgid "Bayesian One Sample T-Test"
-msgstr ""
+msgstr "Uji-T Satu Sampel Bayes"
 
 msgid "Bayesian Paired Samples T-Test"
-msgstr ""
+msgstr "Uji-T Sampel Terpasang Bayes"
 
 msgid "Not enough observations."
 msgstr ""
 
 msgid "Model Summary"
-msgstr ""
+msgstr "Ringkasan Model"
 
 msgid "Effect size"
-msgstr ""
+msgstr "Ukuran efek"
 
 msgid "Standard error"
 msgstr ""
@@ -116,7 +119,7 @@ msgid "exp(Effect size)"
 msgstr ""
 
 msgid "Bayes Factor Robustness Plot"
-msgstr ""
+msgstr "Diagram Kekuatan Faktor Bayes"
 
 msgid "Bayes factor contours breaks could not be parsed into numbers."
 msgstr ""
@@ -197,7 +200,7 @@ msgid "%s%% Credible interval"
 msgstr ""
 
 msgid "Inferential Plots"
-msgstr ""
+msgstr "Diagram Inferensial"
 
 msgid "Normal(%1$s, %2$s)"
 msgstr ""
@@ -218,7 +221,7 @@ msgid "Spike(%1$s)"
 msgstr ""
 
 msgid "Prior"
-msgstr ""
+msgstr "Priori"
 
 msgid "Compared to %1$s."
 msgstr ""
@@ -227,19 +230,19 @@ msgid "The variance parameter of the normal distribution is assumed to be known.
 msgstr ""
 
 msgid "Probability"
-msgstr ""
+msgstr "Probabilitas"
 
 msgid "Density"
-msgstr ""
+msgstr "Densitas"
 
 msgid "Model Comparison"
-msgstr ""
+msgstr "Perbandingan Model"
 
 msgid "Number of covariates"
 msgstr ""
 
 msgid "R%s"
-msgstr ""
+msgstr "R%s"
 
 msgid "Robustness Plot"
 msgstr ""
@@ -266,25 +269,25 @@ msgid "Test Statistics"
 msgstr ""
 
 msgid "Test"
-msgstr ""
+msgstr "Uji"
 
 msgid "Statistic"
-msgstr ""
+msgstr "Statistik"
 
 msgid "df"
-msgstr ""
+msgstr "df"
 
 msgid "df1"
-msgstr ""
+msgstr "df1"
 
 msgid "df2"
-msgstr ""
+msgstr "df2"
 
 msgid "z"
-msgstr ""
+msgstr "z"
 
 msgid "χ²"
 msgstr ""
 
 msgid "F"
-msgstr ""
+msgstr "F"

@@ -1,15 +1,9 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-07-18 11:10+0000\n"
-"Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
-"Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
-"jaspsummarystatistics-qml/gl/>\n"
-"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
 "X-Qt-Contexts: true\n"
@@ -45,18 +39,6 @@ msgstr "Intervalo"
 msgctxt "SummaryStatsTTestBayesianPairedSamples|"
 msgid "t"
 msgstr "t"
-
-msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
-msgid "Group 2 size"
-msgstr "Tamaño do Grupo 2"
-
-msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
-msgid "Group 1 size"
-msgstr "Tamaño do Grupo 1"
-
-msgctxt "SummaryStatsTTestBayesianPairedSamples|"
-msgid "Group size"
-msgstr "Tamaño do grupo"
 
 msgctxt "SummaryStatsRegressionLinearBayesian|"
 msgid "R-squared"
@@ -436,10 +418,6 @@ msgid "t"
 msgstr "t"
 
 msgctxt "SummaryStatsTTestBayesianOneSample|"
-msgid "Group size"
-msgstr "Tamaño do grupo"
-
-msgctxt "SummaryStatsTTestBayesianOneSample|"
 msgid "Alt. Hypothesis"
 msgstr "Hipótese alternativa"
 
@@ -530,10 +508,6 @@ msgstr "T de Student"
 msgctxt "SummaryStatsGeneralBayesianTests|"
 msgid "Binomial"
 msgstr "Binomial"
-
-msgctxt "SummaryStatsGeneralBayesianTests|"
-msgid "Non-central d"
-msgstr "D non-central"
 
 msgctxt "SummaryStatsGeneralBayesianTests|"
 msgid "Non-central t"
@@ -785,8 +759,273 @@ msgstr "Previa pad\tmin:"
 
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "max"
-msgstr "máx"
+msgstr "Máx"
 
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "Specify Bayes factor contours"
 msgstr "Especificar os contornos do Factor de Bayes"
+
+msgctxt "Description|"
+msgid "Classical"
+msgstr "Clásico"
+
+msgctxt "Description|"
+msgid "Test Statistics"
+msgstr "Estatísticos de probas"
+
+msgctxt "Description|"
+msgid "S.S. Test Statistics"
+msgstr "Estatísticos de contrastes S.S."
+
+msgctxt "SummaryStatsGeneralBayesianTests|"
+msgid "Non-central d (one-sample)"
+msgstr "D non centrada (unha mostra)"
+
+msgctxt "SummaryStatsGeneralBayesianTests|"
+msgid "Non-central d (two-sample)"
+msgstr "D non centrada (dúas mostras)"
+
+msgctxt "SummaryStatsGeneralBayesianTests|"
+msgid "Observations (Group 1)"
+msgstr "Observacións (Grupo 1)"
+
+msgctxt "SummaryStatsGeneralBayesianTests|"
+msgid "Observations (Group 2)"
+msgstr "Observacións (Grupo 2)"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Test Type"
+msgstr "Tipo de proba"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Select the type of statistical test to analyze"
+msgstr "Selecciona o tipo de proba estatística para analizar"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "z-test"
+msgstr "Proba Z"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Use when population standard deviation is known"
+msgstr "Utilizar cando o desvío padrón poboacional é coñecido"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Test statistic:"
+msgstr "Estatístico de proba:"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Enter the calculated z-statistic value"
+msgstr "Introducir o valor do estatístico Z calculado"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "t-test"
+msgstr "Proba T"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid ""
+"Use when sample standard deviation is used to estimate population standard "
+"deviation"
+msgstr ""
+"Utilizar cando o desvío padrón mostral se usa para estimar o desvío padrón "
+"poboacional"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Enter the calculated t-statistic value"
+msgstr "Introducir o valor do estatístico T calculado"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "df:"
+msgstr "GL:"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Enter the degrees of freedom for the t-test"
+msgstr "Introducir os graos de liberdade para a proba T"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "χ² test"
+msgstr "Proba χ²"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Use for goodness of fit or independence tests"
+msgstr "Usar para a bondade do axuste ou probas de independencia"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Enter the calculated chi-squared statistic value"
+msgstr "Introducir o valor calculado do estatístico Khi-cadrado"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Enter the degrees of freedom for the chi-squared test"
+msgstr "Introducir os graos de liberdade para a proba Khi-cadrado"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "F-test"
+msgstr "Proba F"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Use for comparing variances or in ANOVA"
+msgstr "Usar para comparar varianzas, ou en ANOVA"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Enter the calculated F-statistic value"
+msgstr "Introducir o valor calculado do estatístico F"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Numerator df:"
+msgstr "GL do numerador:"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Enter the numerator degrees of freedom"
+msgstr "Introducir os graos de liberdade do numerador"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Denominator df:"
+msgstr "GL do denominador:"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Enter the denominator degrees of freedom"
+msgstr "Introducir os graos de liberdade do denominador"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Alternative Hypothesis"
+msgstr "Hipótese alternativa"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid ""
+"Choose the direction of the alternative hypothesis for directional tests"
+msgstr "Escoller a dirección da hipótese alternativa para probas direccionais"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Two-sided"
+msgstr "Bilateral"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Test if the parameter differs from the null value in either direction"
+msgstr "Comprobar se o parámetro difire do valor nulo nalgunha dirección"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Greater"
+msgstr "Maior"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Test if the parameter is greater than the null value"
+msgstr "Probar se o parámetro é maior que o valor cero"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Less"
+msgstr "Menor"
+
+msgctxt "SummaryStatsTestStatistics|"
+msgid "Test if the parameter is less than the null value"
+msgstr "Probar se o parámetro é menor que o valor cero"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "Cohen's d"
+msgstr "D de Cohen"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "Mean 1"
+msgstr "Media 1"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "SD 1"
+msgstr "DP 1"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "Mean 2"
+msgstr "Media 2"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "SD 2"
+msgstr "DP 2"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "Sample size group 1"
+msgstr "Tamaño mostral do Grupo 1"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "Sample size group 2"
+msgstr "Tamaño mostral do Grupo 2"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "Input Type"
+msgstr "Tipo de entrada"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "t and Sample Sizes"
+msgstr "T e Tamaños mostrais"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "Cohen's d and Sample Sizes"
+msgstr "D de Cohen e Tamaños mostrais"
+
+msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
+msgid "Means, SDs, and Sample Sizes"
+msgstr "Medias, DPs e Tamaños mostrais"
+
+msgctxt "SummaryStatsTTestBayesianOneSample|"
+msgid "Cohen's d"
+msgstr "D de Cohen"
+
+msgctxt "SummaryStatsTTestBayesianOneSample|"
+msgid "Mean"
+msgstr "Media"
+
+msgctxt "SummaryStatsTTestBayesianOneSample|"
+msgid "SD"
+msgstr "DP"
+
+msgctxt "SummaryStatsTTestBayesianOneSample|"
+msgid "Test value"
+msgstr "Probar valor"
+
+msgctxt "SummaryStatsTTestBayesianOneSample|"
+msgid "Sample size"
+msgstr "Tamaño da mostra"
+
+msgctxt "SummaryStatsTTestBayesianOneSample|"
+msgid "Input Type"
+msgstr "Tipo de entrada"
+
+msgctxt "SummaryStatsTTestBayesianOneSample|"
+msgid "t and Sample Size"
+msgstr "T e Tamaño mostral"
+
+msgctxt "SummaryStatsTTestBayesianOneSample|"
+msgid "Cohen's d and Sample Size"
+msgstr "D de Cohen e Tamaño mostral"
+
+msgctxt "SummaryStatsTTestBayesianOneSample|"
+msgid "Mean, SD, and Sample Size"
+msgstr "Media, DP e Tamaño mostral"
+
+msgctxt "SummaryStatsTTestBayesianPairedSamples|"
+msgid "Cohen's d"
+msgstr "D de Cohen"
+
+msgctxt "SummaryStatsTTestBayesianPairedSamples|"
+msgid "Mean difference"
+msgstr "Diferenza de Medias"
+
+msgctxt "SummaryStatsTTestBayesianPairedSamples|"
+msgid "SD"
+msgstr "DP"
+
+msgctxt "SummaryStatsTTestBayesianPairedSamples|"
+msgid "Sample size"
+msgstr "Tamaño da mostra"
+
+msgctxt "SummaryStatsTTestBayesianPairedSamples|"
+msgid "Input Type"
+msgstr "Tipo de entrada"
+
+msgctxt "SummaryStatsTTestBayesianPairedSamples|"
+msgid "t and Sample Size"
+msgstr "T e Tamaño mostral"
+
+msgctxt "SummaryStatsTTestBayesianPairedSamples|"
+msgid "Cohen's d and Sample Size"
+msgstr "D de Cohen e Tamaño mostral"
+
+msgctxt "SummaryStatsTTestBayesianPairedSamples|"
+msgid "Mean Diff., SD, and Sample Size"
+msgstr "Dif. medias, DP e Tamaño mostral"

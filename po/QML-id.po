@@ -21,7 +21,7 @@ msgstr "Uji-T"
 
 msgctxt "Description|"
 msgid "Bayesian Independent Samples T-Test"
-msgstr "Uji-T Sampel Independen Bayesian"
+msgstr "Uji-T Sampel Independen Bayes"
 
 msgctxt "Description|"
 msgid "S.S. Bayesian Independent Samples T-Test"
@@ -29,7 +29,7 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Bayesian Paired Samples T-Test"
-msgstr "Uji-T Sampel Berpasangan Bayesian"
+msgstr "Uji-T Sampel Berpasangan Bayes"
 
 msgctxt "Description|"
 msgid "S.S. Bayesian Paired Samples T-Test"
@@ -37,7 +37,7 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Bayesian One Sample T-Test"
-msgstr "Uji-T Satu Sampel Bayesian"
+msgstr "Uji-T Satu Sampel Bayes"
 
 msgctxt "Description|"
 msgid "S.S. Bayesian One Sample T-Test"
@@ -85,7 +85,7 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Lainnya"
 
 msgctxt "Description|"
 msgid "General Bayesian Tests"
@@ -142,7 +142,7 @@ msgstr "Analisis sekuensial"
 
 msgctxt "SummaryStatsABTestBayesian|"
 msgid "Prior"
-msgstr "Prior"
+msgstr "Priori"
 
 msgctxt "SummaryStatsABTestBayesian|"
 msgid "Bayes factor robustness check"
@@ -186,7 +186,7 @@ msgstr "Log rasio odd ≠ 0"
 
 msgctxt "SummaryStatsABTestBayesian|"
 msgid "Sampling"
-msgstr "Sampling"
+msgstr "Pensampelan"
 
 msgctxt "SummaryStatsABTestBayesian|"
 msgid "No. samples"
@@ -254,7 +254,7 @@ msgstr "Info tambahan"
 
 msgctxt "SummaryStatsBinomialTestBayesian|"
 msgid "Prior"
-msgstr "Prior"
+msgstr "Priori"
 
 msgctxt "SummaryStatsBinomialTestBayesian|"
 msgid "Beta prior: parameter a"
@@ -334,7 +334,7 @@ msgstr "Info tambahan"
 
 msgctxt "SummaryStatsCorrelationBayesianPairs|"
 msgid "Prior"
-msgstr "Prior"
+msgstr "Priori"
 
 msgctxt "SummaryStatsCorrelationBayesianPairs|"
 msgid "Stretched beta prior width"
@@ -493,10 +493,9 @@ msgctxt "SummaryStatsRegressionLinearBayesian|"
 msgid "Advanced Options"
 msgstr "Opsi Lanjutan"
 
-#, fuzzy
 msgctxt "SummaryStatsRegressionLinearBayesian|"
 msgid "Prior"
-msgstr "Prior"
+msgstr "Priori"
 
 msgctxt "SummaryStatsRegressionLinearBayesian|"
 msgid "r scale covariates"
@@ -506,7 +505,6 @@ msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
 msgid "t"
 msgstr ""
 
-#, fuzzy
 msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
 msgid "Alt. Hypothesis"
 msgstr "Hipotesis Alt."
@@ -546,7 +544,6 @@ msgctxt "SummaryStatsTTestBayesianOneSample|"
 msgid "t"
 msgstr ""
 
-#, fuzzy
 msgctxt "SummaryStatsTTestBayesianOneSample|"
 msgid "Alt. Hypothesis"
 msgstr "Hipotesis Alt."
@@ -589,7 +586,6 @@ msgctxt "SummaryStatsTTestBayesianPairedSamples|"
 msgid "t"
 msgstr ""
 
-#, fuzzy
 msgctxt "SummaryStatsTTestBayesianPairedSamples|"
 msgid "Alt. Hypothesis"
 msgstr "Hipotesis Alt."
@@ -696,7 +692,6 @@ msgctxt "SummaryStatsBayesianZTest|"
 msgid "upper"
 msgstr "atas"
 
-#, fuzzy
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "Alt. Hypothesis"
 msgstr "Hipotesis Alt."
@@ -929,7 +924,7 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Classical"
-msgstr ""
+msgstr "Klasikal"
 
 msgctxt "Description|"
 msgid "Test Statistics"

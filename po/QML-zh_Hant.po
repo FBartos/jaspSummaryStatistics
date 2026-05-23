@@ -9,27 +9,27 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Summary Statistics"
-msgstr ""
+msgstr "摘要統計量"
 
 msgctxt "Description|"
 msgid "Apply common Bayesian tests from sufficient statistics"
-msgstr ""
+msgstr "運用充分統計量執行常用貝氏檢定"
 
 msgctxt "Description|"
 msgid "T-Tests"
-msgstr ""
+msgstr "T 檢定"
 
 msgctxt "Description|"
 msgid "Bayesian Independent Samples T-Test"
-msgstr ""
+msgstr "貝氏獨立樣本 T 檢定"
 
 msgctxt "Description|"
 msgid "S.S. Bayesian Independent Samples T-Test"
-msgstr ""
+msgstr "統計摘要貝氏獨立樣本 T 檢定"
 
 msgctxt "Description|"
 msgid "Bayesian Paired Samples T-Test"
-msgstr ""
+msgstr "貝氏成對樣本 T 檢定"
 
 msgctxt "Description|"
 msgid "S.S. Bayesian Paired Samples T-Test"
@@ -37,7 +37,7 @@ msgstr ""
 
 msgctxt "Description|"
 msgid "Bayesian One Sample T-Test"
-msgstr ""
+msgstr "貝氏單一樣本 T 檢定"
 
 msgctxt "Description|"
 msgid "S.S. Bayesian One Sample T-Test"
@@ -225,11 +225,11 @@ msgstr ""
 
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "Effect size & SE"
-msgstr ""
+msgstr "效果量和標準誤"
 
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "Effect size & CI"
-msgstr ""
+msgstr "效果量和信賴區間"
 
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "Effect size & CI (log)"
@@ -281,15 +281,15 @@ msgstr ""
 
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "≠ Test value"
-msgstr ""
+msgstr "≠ 檢定值"
 
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "> Test value"
-msgstr ""
+msgstr "> 檢定值"
 
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "< Test value"
-msgstr ""
+msgstr "< 檢定值"
 
 msgctxt "SummaryStatsBayesianZTest|"
 msgid "Prior Distribution"
@@ -385,15 +385,15 @@ msgstr ""
 
 msgctxt "SummaryStatsBinomialTestBayesian|"
 msgid "≠ Test value"
-msgstr ""
+msgstr "≠ 檢定值"
 
 msgctxt "SummaryStatsBinomialTestBayesian|"
 msgid "> Test value"
-msgstr ""
+msgstr "> 檢定值"
 
 msgctxt "SummaryStatsBinomialTestBayesian|"
 msgid "< Test value"
-msgstr ""
+msgstr "< 檢定值"
 
 msgctxt "SummaryStatsBinomialTestBayesian|"
 msgid "Plots"
@@ -665,7 +665,7 @@ msgstr ""
 
 msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
 msgid "Group 1 ≠ Group 2"
-msgstr ""
+msgstr "組 1 ≠ 組 2"
 
 msgctxt "SummaryStatsTTestBayesianIndependentSamples|"
 msgid "Group 1 > Group 2"
@@ -701,15 +701,15 @@ msgstr ""
 
 msgctxt "SummaryStatsTTestBayesianOneSample|"
 msgid "≠ Test value"
-msgstr ""
+msgstr "≠ 檢定值"
 
 msgctxt "SummaryStatsTTestBayesianOneSample|"
 msgid "> Test value"
-msgstr ""
+msgstr "> 檢定值"
 
 msgctxt "SummaryStatsTTestBayesianOneSample|"
 msgid "< Test value"
-msgstr ""
+msgstr "< 檢定值"
 
 msgctxt "SummaryStatsTTestBayesianOneSample|"
 msgid "Plots"
@@ -980,7 +980,7 @@ msgstr ""
 
 msgctxt "SummaryStatsTestStatistics|"
 msgid "Numerator df:"
-msgstr ""
+msgstr "分子自由度："
 
 msgctxt "SummaryStatsTestStatistics|"
 msgid "Enter the numerator degrees of freedom"
@@ -988,7 +988,7 @@ msgstr ""
 
 msgctxt "SummaryStatsTestStatistics|"
 msgid "Denominator df:"
-msgstr ""
+msgstr "分母自由度："
 
 msgctxt "SummaryStatsTestStatistics|"
 msgid "Enter the denominator degrees of freedom"
